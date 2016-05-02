@@ -1,4 +1,4 @@
-# Starter App
+# Final App
 
 ## API
 
