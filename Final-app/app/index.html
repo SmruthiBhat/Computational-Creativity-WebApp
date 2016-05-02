@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/icono.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/material.min.css">
+	<script src="js/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	 
+  </head>
+  <style>
+  h1{
+  font-family: "Existence-StencilLight";
+  }
+      html {
+          overflow-x: scroll;
+      }
+  
+.headerDivider {
+     border-left:1px solid #38546d; 
+     border-right:1px solid #16222c; 
+     height:100%;
+     position:fixed;
+     left:40%;
+     top:10px; 
+}
+#containerGraphs {
+    margin-top: 0rem;
+      }
+#canvas {
+        height: 100%;
+        width: 70%;
+        background-color:#f4f4f4;
+        position:fixed;
+        }
+
+  </style>
+  <body>
+     
+      
+      <div class="container"style="float:left; width:30%">
+	  
+ <br />       
+        <!-- Case 1 -->
+		<div class="banner--service-icon-container">
+			<center><img src="images/cogito.png" alt="Demo Icon" style="width: 105px; height: 100px;"></center>;
+		</div>
+		 <h1><br/>Cogito</h1>
+<div class="tab-panels" role="tabpanel">
+				<h3 class="base--h3"><b>Enter a topic of your interest<b></h3>
+				  <div class="tab-panels--tab-content">
+					<div id="concepts-panel" class="tab-panels--tab-pane active" role="tab-panel">
+					  <div class="concept--input-concept-list">
+						<div class="concept">
+						  <div class="concept--new-concept-container active">
+							<span>+</span>
+							<span>add topic</span>
+						  </div>
+						  <div class="concept--input-container">
+							 <span class="twitter-typeahead" style="position: relative; display: inline-block;"><input class="concept--input tt-input" type="text" id="tb1" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: 'Helvetica Neue', Helvetica, 'Open Sans', Arial, 'Lucida Grande', Roboto, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><div class="tt-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"><div class="tt-dataset tt-dataset-0"></div></div></span>
+						  </div>
+						</div>
+					  </div>
+					  
+					</div>
+			
+				  </div>
+				  <br/>
+				<div id="getTopic"></div>
+				
+				</div>
+				<div id="concepts-panel-API" class="input--API input--json-container">
+			    <pre class="base--pre API--json language-javascript">
+					<code id="concepts-panel-API-data" class="base--code language-javascript">
+					</code>
+				</pre>
+			</div>
+			<div id="text-panel-API" class="input--API input--json-container">
+			    <pre class="base--pre API--json language-javascript">
+					<code id="text-panel-API-data" class="base--code language-javascript">
+					</code>
+				</pre>
+			</div>
+<div id="TextBoxContainer">
+    <!--Textboxes will be added here -->
+</div>
+
+	
+	
+		<div id = "leftResult"></div>
+		<div id = "leftBottom"></div>
+	
+		</div>
+	  <center><div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="display:none;"></div></center>
+	  <div class="container"style="float:right; width:69%;right:100%">
+	  
+        <!-- Output -->
+		
+        <div id="results"></div>
+		<div id="containerGraphs"><canvas id="canvas"></canvas></div>
+		<script src="js/three.min.js"></script>
+    <script src="js/controls/TrackballControls.js"></script>
+        <script src="js/controls/OrbitControls.js"></script>
+		<script src="js/Detector.js"></script>
+		<script src="js/libs/stats.min.js"></script>
+        <script src="js/cameras/CombinedCamera.js"></script>
+        
+        
+    <script src="js/three-text2d.js"></script>      
+
+        <script src="js/libs/dat.gui.min.js"></script>
+
+		<script type="x-shader/x-vertex" id="vertexshader">
+
+        
+			attribute float size;
+			attribute vec3 customColor;
+
+			varying vec3 vColor;
+
+			void main() {
+
+				vColor = customColor;
+
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+				gl_PointSize = size * ( 300.0 / -mvPosition.z );
+
+				gl_Position = projectionMatrix * mvPosition;
+
+			}
+
+		</script>
+
+		<script type="x-shader/x-fragment" id="fragmentshader">
+
+			uniform vec3 color;
+			uniform sampler2D texture;
+
+			varying vec3 vColor;
+
+			void main() {
+
+				gl_FragColor = vec4( color * vColor, 1.0 );
+
+				gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+
+				if ( gl_FragColor.a < ALPHATEST ) discard;
+
+			}
+
+		</script>
+
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://twitter.github.io/typeahead.js/releases/0.11.1/typeahead.bundle.js"></script>
+	<script type="text/javascript" src="js/vendor/_prism.js"></script>
+			<script src="https://twitter.github.io/typeahead.js/releases/0.11.1/typeahead.bundle.js"></script>
+    <!--<script src="js/main.js"></script>  -->
+	<script type="text/javascript" src="js/citypeahead.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>	
+	<script type="text/javascript" src="js/graph.js"></script>	
+	  <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"></script>
+	
+	 
+	
+  </body>
+</html>
