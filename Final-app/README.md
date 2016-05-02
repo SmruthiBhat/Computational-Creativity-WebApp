@@ -6,7 +6,7 @@ To run the API:
 
 1. Navigate to the **api/** directory 
   ```
-  $ cd starter-app/api/
+  $ cd Final-app/api/
   ```
 
 2. Install the dependencies
@@ -26,7 +26,7 @@ To run the app:
 
 1. Navigate to the **app** directory
   ```
-  $ cd starter-app/app/
+  $ cd Final-app/app/
   ```
 
 2. Run the app
