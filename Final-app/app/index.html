@@ -38,11 +38,59 @@
         background-color:#f4f4f4;
         position:fixed;
         }
+<style type="text/css">
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+opacity: 0.5;
+} 
+#boxes .window {
+  position:absolute;
+  left:0;
+  top:0;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+#boxes #dialog {
+  padding:10px;
+  background-color:#F7F2FB;
+border: 0px solid #717073;
+}
+#boxes #dialog p{
+max-width: 425px;
+}
+.close {
+position:absolute;
+right:-20px;
+top:-20px;
+}
 
   </style>
   <body>
-     
-      
+  
+     <div id="boxes">
+<div id="dialog" class="window">
+<a href="#" class="close"><img src="/images/close_icon.png" /></a>
+<!-- INSERT VIDEO DESCRIPTION HERE -->
+<p2><b>This is a tutorial. It walks you through the application's functionalities. Close if you want to proceed to the site.<b></p2>
+<br/>
+
+<!-- INSERT EMBED CODE FOR THE VIDEO HERE -->
+<center><iframe width="640" height="390" src="https://www.youtube.com/embed/6GQ5HovI2T4" frameborder="0" allowfullscreen></iframe></center>
+
+</div>
+
+
+
+ <!-- Mask to cover the whole screen -->
+ 
+</div>
+<div id = "mask">
       <div class="container"style="float:left; width:30%">
 	  
  <br />       
@@ -156,7 +204,7 @@
 
 		</script>
 
-      </div>
+   </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
